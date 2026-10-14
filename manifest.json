@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Session Port — 开发者会话工具",
+  "version": "1.0.0",
+  "description": "为开发调试配置站点的 Cookie、localStorage 和 sessionStorage，一键注入会话数据并打开站点。",
+  "minimum_chrome_version": "102",
+  "permissions": ["storage", "cookies", "scripting"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Session Port — 开发者会话工具",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

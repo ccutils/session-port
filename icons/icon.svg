@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- 字母e深色质感渐变（在白底和浅色底上清晰醒目） -->
+    <linearGradient id="eGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- 烟斗红木质感渐变 -->
+    <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C" />
+      <stop offset="50%" stop-color="#B45309" />
+      <stop offset="100%" stop-color="#78350F" />
+    </linearGradient>
+
+    <!-- 烟雾渐变（白底可见的灰蓝色） -->
+    <linearGradient id="smokeGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#64748B" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#94A3B8" stop-opacity="0.25" />
+    </linearGradient>
+
+    <!-- 立体投影（兼顾白底立体感与深色背景的边界区分） -->
+    <filter id="shadow" x="-15%" y="-15%" width="135%" height="135%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- 主体组（无背景，自带透明底） -->
+  <g filter="url(#shadow)">
+
+    <!-- 字母 "e" 形状的脸部轮廓 -->
+    <path d="M 155 256
+             L 340 256
+             C 340 145, 275 110, 215 110
+             C 135 110, 95 170, 95 256
+             C 95 345, 145 402, 225 402
+             C 275 402, 310 380, 330 350"
+          fill="none"
+          stroke="url(#eGrad)"
+          stroke-width="48"
+          stroke-linecap="round"
+          stroke-linejoin="round" />
+
+    <!-- 眼睛（适配白底：深色眼珠 + 纯白高光） -->
+    <circle cx="235" cy="195" r="19" fill="#1E293B" />
+    <circle cx="242" cy="189" r="6" fill="#FFFFFF" />
+    <circle cx="229" cy="201" r="2.5" fill="#FFFFFF" opacity="0.7" />
+
+    <!-- 挑起的眉毛 -->
+    <path d="M 208 166 Q 238 154 262 170"
+          fill="none"
+          stroke="#475569"
+          stroke-width="9"
+          stroke-linecap="round" />
+
+    <!-- 烟斗组件（从字母e的嘴巴开口处延伸出来） -->
+    <g>
+      <!-- 深色咬嘴 -->
+      <path d="M 285 280 L 345 298"
+            stroke="#0F172A"
+            stroke-width="16"
+            stroke-linecap="round" />
+
+      <!-- 黄铜金属环 -->
+      <line x1="342" y1="288" x2="336" y2="308"
+            stroke="#F59E0B"
+            stroke-width="9"
+            stroke-linecap="round" />
+
+      <!-- 弯折木质烟杆与烟锅 -->
+      <path d="M 338 298
+               Q 385 312, 405 285
+               L 405 245
+               L 455 245
+               L 450 295
+               C 446 335, 395 338, 338 304 Z"
+            fill="url(#pipeGrad)"
+            stroke="#451A03"
+            stroke-width="5"
+            stroke-linejoin="round" />
+
+      <!-- 烟斗口边沿装饰 -->
+      <rect x="400" y="237" width="60" height="12" rx="6"
+            fill="#92400E"
+            stroke="#451A03"
+            stroke-width="4" />
+    </g>
+
+    <!-- 袅袅青烟（灰蓝色调，在白底上依然清晰柔和） -->
+    <path d="M 432 218
+             C 412 192, 458 172, 435 140
+             C 418 115, 448 92, 430 70"
+          fill="none"
+          stroke="url(#smokeGrad)"
+          stroke-width="10"
+          stroke-linecap="round" />
+  </g>
+</svg>

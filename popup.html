@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Session Port — 开发者会话工具</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="popup-body">
+  <main class="popup-shell">
+    <header class="popup-header">
+      <img src="icons/icon.svg" width="48" height="48" alt="Session Port 图标">
+      <div>
+        <h1>Session Port</h1>
+        <p class="brand-subtitle">开发者会话工具</p>
+      </div>
+    </header>
+
+    <div class="list-heading">
+      <span>我的站点</span>
+      <span id="site-count" class="count">0</span>
+    </div>
+    <div id="site-list" class="site-list" aria-live="polite"></div>
+    <p id="popup-status" class="status" role="status"></p>
+
+    <button id="open-options" class="settings-link" type="button">
+      <span class="settings-icon" aria-hidden="true">⚙</span>
+      <span>配置站点</span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </button>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

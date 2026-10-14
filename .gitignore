@@ -1,0 +1,19 @@
+# Dependencies and generated development artifacts
+node_modules/
+output/
+coverage/
+dist/
+.cache/
+.browser-check/
+.playwright-cli/
+
+# Local configuration and logs
+.env
+.env.*
+!.env.example
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini

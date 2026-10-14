@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>配置站点 · Session Port — 开发者会话工具</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="options-body">
+  <div class="options-layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="icons/icon.svg" width="48" height="48" alt="">
+        <div><strong>Session Port</strong><span class="brand-subtitle">开发者会话工具</span></div>
+      </div>
+      <div class="sidebar-title"><span>站点列表</span><span id="options-count" class="count">0</span></div>
+      <nav id="options-list" class="options-list" aria-label="已配置站点"></nav>
+      <button id="new-site" class="new-site" type="button"><span aria-hidden="true">＋</span> 添加站点</button>
+      <div class="sidebar-footer">配置只保存在当前浏览器中</div>
+    </aside>
+
+    <main class="editor-wrap">
+      <div class="editor-topline"><span class="topline-dot"></span> 站点配置</div>
+      <div class="editor-card">
+        <div class="editor-intro">
+          <div>
+            <span id="editor-kicker" class="eyebrow">NEW SITE</span>
+            <h1 id="editor-title">添加站点</h1>
+            <p>点击扩展图标后，可从列表一键打开并注入数据。</p>
+          </div>
+          <span class="intro-art" aria-hidden="true">e<span></span></span>
+        </div>
+
+        <form id="site-form" novalidate>
+          <section class="form-section">
+            <div class="section-heading"><span class="section-number">01</span><div><h2>基本信息</h2><p>列表中显示的名称与打开的网址</p></div></div>
+            <div class="field-grid">
+              <label class="field"><span>站点名称 <em>*</em></span><input id="site-name" name="name" maxlength="60" placeholder="例如：工作台" autocomplete="off" required></label>
+              <label class="field"><span>站点 URL <em>*</em></span><input id="site-url" name="url" type="url" placeholder="https://example.com/dashboard" autocomplete="off" required></label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading"><span class="section-number">02</span><div><h2>注入数据</h2><p>切换数据类型，每行配置一条数据</p></div></div>
+            <div class="data-tabs" role="tablist" aria-label="注入数据类型">
+              <button id="tab-cookies" class="data-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-cookies" data-editor="cookies"><i class="type-dot cookie"></i>Cookie <span class="tab-count">0</span></button>
+              <button id="tab-localStorage" class="data-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-localStorage" tabindex="-1" data-editor="localStorage"><i class="type-dot local"></i>localStorage <span class="tab-count">0</span></button>
+              <button id="tab-sessionStorage" class="data-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-sessionStorage" tabindex="-1" data-editor="sessionStorage"><i class="type-dot session"></i>sessionStorage <span class="tab-count">0</span></button>
+            </div>
+            <div id="panel-cookies" class="data-panel" role="tabpanel" aria-labelledby="tab-cookies">
+              <p class="data-help">域留空时使用站点主机；路径默认为 /；过期时间留空时为会话 Cookie。</p>
+              <div class="data-table-wrap"><table class="data-table cookie-table"><thead><tr><th scope="col">名称</th><th scope="col">值</th><th scope="col">域</th><th scope="col">路径</th><th scope="col">过期时间</th><th scope="col">HttpOnly</th><th scope="col"><span class="visually-hidden">操作</span></th></tr></thead><tbody id="cookies-rows"></tbody></table></div>
+              <button class="add-row" data-add="cookies" type="button">＋ 添加 Cookie</button>
+            </div>
+            <div id="panel-localStorage" class="data-panel" role="tabpanel" aria-labelledby="tab-localStorage" hidden>
+              <p class="data-help">数据保存在该站点的浏览器存储中，值可以包含等号和换行。</p>
+              <div class="data-table-wrap"><table class="data-table storage-table"><thead><tr><th scope="col">Key</th><th scope="col">Value</th><th scope="col"><span class="visually-hidden">操作</span></th></tr></thead><tbody id="localStorage-rows"></tbody></table></div>
+              <button class="add-row" data-add="localStorage" type="button">＋ 添加一行</button>
+            </div>
+            <div id="panel-sessionStorage" class="data-panel" role="tabpanel" aria-labelledby="tab-sessionStorage" hidden>
+              <p class="data-help">数据只作用于新打开的标签页会话，值可以包含等号和换行。</p>
+              <div class="data-table-wrap"><table class="data-table storage-table"><thead><tr><th scope="col">Key</th><th scope="col">Value</th><th scope="col"><span class="visually-hidden">操作</span></th></tr></thead><tbody id="sessionStorage-rows"></tbody></table></div>
+              <button class="add-row" data-add="sessionStorage" type="button">＋ 添加一行</button>
+            </div>
+          </section>
+
+          <div class="form-footer">
+            <p id="form-status" class="status" role="status"></p>
+            <div class="form-actions"><button id="delete-site" class="danger-button" type="button" hidden>删除站点</button><button class="primary-button" type="submit">保存站点 <span aria-hidden="true">→</span></button></div>
+          </div>
+        </form>
+      </div>
+      <p class="editor-note">站点可能将这些值用于登录。请只添加你信任的网址，并妥善保管此浏览器配置。</p>
+    </main>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
