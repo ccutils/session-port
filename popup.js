@@ -1,4 +1,7 @@
 import { originPattern, SITES_KEY } from './common.js';
+import { localizePage, t } from './i18n.js';
+
+localizePage();
 
 const list = document.querySelector('#site-list');
 const status = document.querySelector('#popup-status');
@@ -18,7 +21,15 @@ function render(sites) {
   if (!sites.length) {
     const empty = document.createElement('div');
     empty.className = 'empty-state';
-    empty.innerHTML = '<span class="empty-symbol" aria-hidden="true">＋</span><strong>还没有站点</strong><span>从下方入口添加第一个站点</span>';
+    const symbol = document.createElement('span');
+    symbol.className = 'empty-symbol';
+    symbol.setAttribute('aria-hidden', 'true');
+    symbol.textContent = '＋';
+    const title = document.createElement('strong');
+    title.textContent = t('emptyTitle');
+    const hint = document.createElement('span');
+    hint.textContent = t('emptyHint');
+    empty.append(symbol, title, hint);
     list.append(empty);
     return;
   }
@@ -53,10 +64,10 @@ async function openSite(site, button) {
   try {
     // Keep this call in the click flow: permission prompts require a user gesture.
     const granted = await chrome.permissions.request({ origins: [originPattern(site.url)] });
-    if (!granted) throw new Error('未获得站点访问权限，无法写入数据');
-    status.textContent = `正在打开 ${site.name}…`;
+    if (!granted) throw new Error(t('deniedWrite'));
+    status.textContent = t('openingSite', [site.name]);
     const result = await chrome.runtime.sendMessage({ type: 'launch-site', siteId: site.id });
-    if (!result?.ok) throw new Error(result?.error || '打开站点失败');
+    if (!result?.ok) throw new Error(result?.error || t('openFailed'));
     window.close();
   } catch (error) {
     status.textContent = error.message;

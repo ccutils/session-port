@@ -1,0 +1,315 @@
+{
+  "localeCode": {
+    "message": "zh-CN"
+  },
+  "extensionName": {
+    "message": "Session Port — 开发者会话工具"
+  },
+  "extensionDescription": {
+    "message": "为开发调试配置站点的 Cookie、localStorage 和 sessionStorage，一键注入会话数据并打开站点。"
+  },
+  "brandSubtitle": {
+    "message": "开发者会话工具"
+  },
+  "iconAlt": {
+    "message": "Session Port 图标"
+  },
+  "optionsTitle": {
+    "message": "配置站点 · Session Port — 开发者会话工具"
+  },
+  "mySites": {
+    "message": "我的站点"
+  },
+  "configureSites": {
+    "message": "配置站点"
+  },
+  "emptyTitle": {
+    "message": "还没有站点"
+  },
+  "emptyHint": {
+    "message": "从下方入口添加第一个站点"
+  },
+  "openingSite": {
+    "message": "正在打开 $SITE$…",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "deniedWrite": {
+    "message": "未获得站点访问权限，无法写入数据"
+  },
+  "openFailed": {
+    "message": "打开站点失败"
+  },
+  "siteList": {
+    "message": "站点列表"
+  },
+  "siteListAria": {
+    "message": "已配置站点"
+  },
+  "addSite": {
+    "message": "添加站点"
+  },
+  "localOnly": {
+    "message": "配置只保存在当前浏览器中"
+  },
+  "siteConfiguration": {
+    "message": "站点配置"
+  },
+  "editSite": {
+    "message": "编辑站点"
+  },
+  "newKicker": {
+    "message": "新增站点"
+  },
+  "editKicker": {
+    "message": "编辑站点"
+  },
+  "introHelp": {
+    "message": "点击扩展图标后，可从列表一键打开并注入数据。"
+  },
+  "basicInfo": {
+    "message": "基本信息"
+  },
+  "basicHelp": {
+    "message": "列表中显示的名称与打开的网址"
+  },
+  "siteName": {
+    "message": "站点名称"
+  },
+  "siteNamePlaceholder": {
+    "message": "例如：工作台"
+  },
+  "siteUrl": {
+    "message": "站点 URL"
+  },
+  "injectionData": {
+    "message": "注入数据"
+  },
+  "injectionHelp": {
+    "message": "切换数据类型，每行配置一条数据"
+  },
+  "dataTypesAria": {
+    "message": "注入数据类型"
+  },
+  "cookieHelp": {
+    "message": "域留空时使用站点主机；路径默认为 /；过期时间留空时为会话 Cookie。"
+  },
+  "actions": {
+    "message": "操作"
+  },
+  "cookieName": {
+    "message": "名称"
+  },
+  "cookieValue": {
+    "message": "值"
+  },
+  "cookieDomain": {
+    "message": "域"
+  },
+  "cookiePath": {
+    "message": "路径"
+  },
+  "cookieExpiration": {
+    "message": "过期时间"
+  },
+  "httpOnly": {
+    "message": "HttpOnly"
+  },
+  "addCookie": {
+    "message": "添加 Cookie"
+  },
+  "localHelp": {
+    "message": "数据保存在该站点的浏览器存储中，值可以包含等号和换行。"
+  },
+  "sessionHelp": {
+    "message": "数据只作用于新打开的标签页会话，值可以包含等号和换行。"
+  },
+  "keyLabel": {
+    "message": "Key"
+  },
+  "storageValueLabel": {
+    "message": "Value"
+  },
+  "addRow": {
+    "message": "添加一行"
+  },
+  "deleteSite": {
+    "message": "删除站点"
+  },
+  "saveSite": {
+    "message": "保存站点"
+  },
+  "editorNote": {
+    "message": "站点可能将这些值用于登录。请只添加你信任的网址，并妥善保管此浏览器配置。"
+  },
+  "domainPlaceholder": {
+    "message": "留空使用站点主机"
+  },
+  "deleteRow": {
+    "message": "删除此行"
+  },
+  "incompleteExpiration": {
+    "message": "请填写完整的 Cookie 过期时间"
+  },
+  "siteNameRequired": {
+    "message": "请填写站点名称"
+  },
+  "saved": {
+    "message": "已保存。点击浏览器工具栏图标即可打开。"
+  },
+  "deleteConfirm": {
+    "message": "确定删除“$SITE$”吗？",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "deleted": {
+    "message": "站点已删除"
+  },
+  "invalidUrl": {
+    "message": "请输入完整 URL，例如 https://example.com/dashboard"
+  },
+  "invalidProtocol": {
+    "message": "站点 URL 仅支持 http 或 https"
+  },
+  "urlCredentials": {
+    "message": "请不要在站点 URL 中填写用户名或密码"
+  },
+  "pairSyntax": {
+    "message": "$LABEL$ 第 $ROW$ 行应为 名称=值",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "row": {
+        "content": "$2"
+      }
+    }
+  },
+  "invalidPairName": {
+    "message": "$LABEL$ 第 $ROW$ 行的名称无效",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "row": {
+        "content": "$2"
+      }
+    }
+  },
+  "duplicateEntry": {
+    "message": "$LABEL$ 中的“$NAME$”重复了",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "storageKeyRequired": {
+    "message": "$LABEL$ 第 $ROW$ 行请填写 Key",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "row": {
+        "content": "$2"
+      }
+    }
+  },
+  "cookieNameInvalid": {
+    "message": "Cookie 第 $ROW$ 行请填写有效的名称",
+    "placeholders": {
+      "row": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieDomainInvalid": {
+    "message": "Cookie“$NAME$”的域无效，请填写主机名",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieDomainHost": {
+    "message": "Cookie“$NAME$”的域必须为 $HOST$ 或其父域",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "cookiePathInvalid": {
+    "message": "Cookie“$NAME$”的路径必须以 / 开头",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieExpiryInvalid": {
+    "message": "Cookie“$NAME$”的过期时间无效",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieDuplicate": {
+    "message": "Cookie“$NAME$”在相同域和路径下重复了",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteMissing": {
+    "message": "站点不存在，请刷新列表后重试"
+  },
+  "permissionMissing": {
+    "message": "尚未获得此站点的访问权限"
+  },
+  "cookieWriteFailed": {
+    "message": "Cookie“$NAME$”写入失败",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "invalidLaunch": {
+    "message": "无效的启动请求"
+  },
+  "expiredLaunch": {
+    "message": "启动信息已失效，请重新从扩展打开站点"
+  },
+  "launchMismatch": {
+    "message": "启动页面与站点配置不匹配"
+  },
+  "launchUnavailable": {
+    "message": "无法取得启动信息，请从扩展重新打开站点"
+  },
+  "storageWriteFailed": {
+    "message": "网页存储写入失败：$ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "launchFailedHeading": {
+    "message": "站点启动失败"
+  }
+}

@@ -12,7 +12,7 @@
 
   chrome.runtime.sendMessage({ type: 'consume-launch', token }, (response) => {
     if (chrome.runtime.lastError || !response?.ok) {
-      showError(response?.error || '无法取得启动信息，请从扩展重新打开站点');
+      showError(response?.error || chrome.i18n.getMessage('launchUnavailable'));
       return;
     }
 
@@ -25,7 +25,7 @@
       }
       location.replace(response.payload.url);
     } catch (error) {
-      showError(`网页存储写入失败：${error.message}`);
+      showError(chrome.i18n.getMessage('storageWriteFailed', [error.message]));
     }
   });
 
@@ -33,10 +33,12 @@
     // The original response has been stopped, so keep failures visible.
     if (!document.documentElement) document.append(document.createElement('html'));
     document.documentElement.replaceChildren();
+    document.documentElement.lang = chrome.i18n.getMessage('localeCode');
+    document.title = chrome.i18n.getMessage('launchFailedHeading');
     const body = document.createElement('body');
     body.style.cssText = 'font:16px system-ui,sans-serif;padding:32px;line-height:1.6';
     const heading = document.createElement('h1');
-    heading.textContent = '站点启动失败';
+    heading.textContent = chrome.i18n.getMessage('launchFailedHeading');
     const detail = document.createElement('p');
     detail.textContent = message;
     body.append(heading, detail);

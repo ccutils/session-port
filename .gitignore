@@ -13,6 +13,10 @@ dist/
 !.env.example
 *.log
 
+# Extension signing keys and locally packed CRX files
+*.pem
+*.crx
+
 # Operating system files
 .DS_Store
 Thumbs.db

@@ -2,8 +2,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/smoke.mjs",
-    "icons": "node scripts/generate-icons.mjs"
+    "test": "node tests/smoke.mjs && node tests/i18n.mjs",
+    "icons": "node scripts/generate-icons.mjs",
+    "package": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package.ps1"
   },
   "devDependencies": {
     "sharp": "0.35.5"

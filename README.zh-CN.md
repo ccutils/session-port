@@ -16,6 +16,7 @@
 - 使用两列编辑存储的 Key 和 Value，支持空值和多行值。
 - 先写入 Cookie，再打开标签页并初始化网页存储，最后加载目标页面。
 - 首次打开某个站点时，按站点主机请求访问权限。
+- 支持英文和简体中文，自动跟随浏览器界面语言；其他语言默认显示英文。
 
 ## 安装
 
@@ -36,7 +37,7 @@
 3. 在三个数据标签页中添加或删除行，然后保存站点。
 4. 从工具栏菜单选择站点；如浏览器弹出访问权限请求，允许后即可打开。
 
-当前界面使用简体中文。
+扩展名称、界面、字段说明、确认提示和错误信息会跟随浏览器界面语言。修改浏览器语言后，如有提示请重启浏览器，并重新打开扩展页面。
 
 ### Cookie 配置
 
@@ -57,6 +58,32 @@ HTTPS URL 的 Cookie 自动标记为 Secure。旧配置缺少新增 Cookie 字�
 - 只写入配置的键，不清空其他已有数据。
 - 配置保存在当前浏览器的扩展存储中，不通过浏览器账号同步，也不提供额外加密。
 - 访问权限作用于配置的主机；重定向到其他主机时，不会自动授权或初始化那个主机。
+
+## 打包与分发
+
+在 Windows 上生成干净的发布目录和 ZIP：
+
+```sh
+npm run package
+```
+
+版本为 `1.0.0` 时，输出为 `dist/session-port-1.0.0/` 和 `dist/session-port-1.0.0.zip`。ZIP 根目录直接包含 `manifest.json`，同时包含运行文件、图标、两种语言和许可证；排除开发依赖、测试、预览截图及签名私钥。
+
+- **开发者安装：** 分享 ZIP，解压后，在 `edge://extensions` 或 `chrome://extensions` 中使用**加载已解压的扩展程序**选择解压目录。
+- **Edge 扩展商店分发：** 通过 Microsoft Partner Center 上传 ZIP。商店发布流程会生成可安装的 CRX，审核通过后用户从商店安装。参见[发布 Microsoft Edge 扩展](https://learn.microsoft.com/en-us/microsoft-edge/extensions/publish/publish-extension)。
+- **企业自托管 CRX：** 在 Edge 中使用**打包扩展**，选择干净的发布目录。生成的 PEM 私钥应妥善保管，后续版本复用同一私钥。安装需要符合企业部署条件，参见[自托管 Microsoft Edge 扩展](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-manage-extensions-webstore)。
+
+### `CRX_REQUIRED_PROOF_MISSING`
+
+此错误表示安装验证器没有找到要求的签名证明。自行打包的 CRX 有开发者签名，但不一定满足当前安装渠道要求的受信任发布者证明。重新打包或修改 manifest 不会补上这种证明。
+
+本地测试请在 `edge://extensions` 中开启开发者模式，使用**加载已解压的扩展程序**选择干净的发布目录。将自打包 CRX 拖到扩展页面，在部分 Edge 环境中可能安装成功，但安装成功不代表能够启用。面向普通用户分发应通过 Edge 扩展商店；企业统一部署应遵循自托管条件。参见 [Edge 扩展托管说明](https://learn.microsoft.com/en-us/microsoft-edge/extensions/publish/hosting-and-updating)和 [Chromium CRX 验证器](https://chromium.googlesource.com/chromium/src/+/HEAD/components/crx_file/crx_verifier.h)。
+
+### CRX 已安装，但被提示来源未知并停用
+
+如果 Edge 提示“此扩展不是来自任何已知来源，可能是在你不知情的情况下添加的。”且无法启用，说明已打包的扩展被浏览器来源校验拦截。重新打包或修改 `manifest.json` 不会获得商店来源信任。
+
+开发使用时，打开 `edge://extensions`，开启开发者模式，点击**加载已解压的扩展程序**，选择 `dist/session-port-1.0.0/`（或当前版本的发布目录）。参见[微软本地安装说明](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/extension-sideloading)。如果受管理设备上无法开启开发者模式或加载已解压目录，请查看 `edge://policy` 并联系负责扩展策略的管理员。
 
 ## 开发
 

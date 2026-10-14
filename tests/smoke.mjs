@@ -2,22 +2,26 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
 import { cookieDetails, normalizeCookieEntries, normalizeStorageEntries, parsePairs, normalizeUrl, scriptIdForUrl } from '../common.js';
+import { createMockI18n } from './helpers/i18n.mjs';
+
+const i18n = createMockI18n();
+globalThis.chrome = { i18n };
 
 assert.deepEqual(parsePairs('token=a=b\nempty=', '测试'), [
   { name: 'token', value: 'a=b' },
   { name: 'empty', value: '' }
 ]);
-assert.throws(() => parsePairs('broken', '测试'), /名称=值/);
-assert.throws(() => normalizeUrl('javascript:alert(1)'), /仅支持/);
+assert.throws(() => parsePairs('broken', 'test'), /name=value/);
+assert.throws(() => normalizeUrl('javascript:alert(1)'), /HTTP or HTTPS/);
 
 const legacyCookie = normalizeCookieEntries([{ name: 'sid', value: 'abc' }], 'https://example.com/')[0];
 assert.deepEqual(cookieDetails(legacyCookie, 'https://example.com/'), {
   url: 'https://example.com/', name: 'sid', value: 'abc', path: '/', secure: true, httpOnly: false
 });
 assert.deepEqual(normalizeStorageEntries([{ name: '', value: '' }, { name: 'token', value: 'a=b\nnext' }], 'localStorage'), [{ name: 'token', value: 'a=b\nnext' }]);
-assert.throws(() => normalizeStorageEntries([{ name: '', value: 'abc' }], 'localStorage'), /填写 Key/);
-assert.throws(() => normalizeCookieEntries([{ name: 'sid', domain: 'other.com' }], 'https://example.com/'), /父域/);
-assert.throws(() => normalizeCookieEntries([{ name: 'sid', path: 'bad' }], 'https://example.com/'), /路径/);
+assert.throws(() => normalizeStorageEntries([{ name: '', value: 'abc' }], 'localStorage'), /Enter a Key/);
+assert.throws(() => normalizeCookieEntries([{ name: 'sid', domain: 'other.com' }], 'https://example.com/'), /parent domain/);
+assert.throws(() => normalizeCookieEntries([{ name: 'sid', path: 'bad' }], 'https://example.com/'), /path/);
 assert.equal(normalizeCookieEntries([{ name: 'sid', path: '/' }, { name: 'sid', path: '/app' }], 'https://example.com/').length, 2);
 
 const site = {
@@ -35,6 +39,7 @@ let messageHandler;
 let tabUrl;
 
 globalThis.chrome = {
+  i18n,
   runtime: { onMessage: { addListener(handler) { messageHandler = handler; } } },
   storage: {
     local: { async get() { return { sites: [site] }; } },
@@ -98,6 +103,7 @@ const bootstrapContext = {
   },
   window: { stop() { bootstrapEvents.push(['stop']); } },
   chrome: {
+    i18n,
     runtime: {
       lastError: null,
       sendMessage(message, callback) {

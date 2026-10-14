@@ -1,3 +1,5 @@
+import { t } from './i18n.js';
+
 export const SITES_KEY = "sites";
 export const BOOTSTRAP_HASH = "#__session_port_bootstrap=";
 
@@ -7,13 +9,13 @@ export function normalizeUrl(value) {
   try {
     url = new URL(raw);
   } catch {
-    throw new Error("请输入完整 URL，例如 https://example.com/dashboard");
+    throw new Error(t('invalidUrl'));
   }
   if (!['http:', 'https:'].includes(url.protocol)) {
-    throw new Error("站点 URL 仅支持 http 或 https");
+    throw new Error(t('invalidProtocol'));
   }
   if (url.username || url.password) {
-    throw new Error("请不要在站点 URL 中填写用户名或密码");
+    throw new Error(t('urlCredentials'));
   }
   return url.href;
 }
@@ -35,15 +37,15 @@ export function parsePairs(text, label) {
     if (!line.trim()) return;
     const equals = line.indexOf('=');
     if (equals < 1) {
-      throw new Error(`${label} 第 ${index + 1} 行应为 名称=值`);
+      throw new Error(t('pairSyntax', [label, index + 1]));
     }
     const name = line.slice(0, equals).trim();
     const value = line.slice(equals + 1);
     if (!name || /[\r\n]/.test(name)) {
-      throw new Error(`${label} 第 ${index + 1} 行的名称无效`);
+      throw new Error(t('invalidPairName', [label, index + 1]));
     }
     if (names.has(name)) {
-      throw new Error(`${label} 中的“${name}”重复了`);
+      throw new Error(t('duplicateEntry', [name, label]));
     }
     names.add(name);
     pairs.push({ name, value });
@@ -68,8 +70,8 @@ export function normalizeStorageEntries(rows, label) {
     const name = String(row.name || '').trim();
     const value = String(row.value ?? '');
     if (!name && !value) continue;
-    if (!name) throw new Error(`${label} 第 ${index + 1} 行请填写 Key`);
-    if (names.has(name)) throw new Error(`${label} 中的“${name}”重复了`);
+    if (!name) throw new Error(t('storageKeyRequired', [label, index + 1]));
+    if (names.has(name)) throw new Error(t('duplicateEntry', [name, label]));
     names.add(name);
     entries.push({ name, value });
   }
@@ -88,22 +90,22 @@ export function normalizeCookieEntries(rows, siteUrl) {
     const httpOnly = Boolean(row.httpOnly);
     const expirationDate = row.expirationDate;
     if (!name && !value && !domain && path === '/' && !httpOnly && expirationDate == null) continue;
-    if (!isValidCookieName(name)) throw new Error(`Cookie 第 ${index + 1} 行请填写有效的名称`);
+    if (!isValidCookieName(name)) throw new Error(t('cookieNameInvalid', [index + 1]));
     if (domain) {
       const bareDomain = domain.replace(/^\./, '');
-      if (!bareDomain || /[\s/:?#@*]/.test(bareDomain)) throw new Error(`Cookie“${name}”的域无效，请填写主机名`);
+      if (!bareDomain || /[\s/:?#@*]/.test(bareDomain)) throw new Error(t('cookieDomainInvalid', [name]));
       let normalizedDomain;
       try { normalizedDomain = new URL(`http://${bareDomain}`).hostname; }
-      catch { throw new Error(`Cookie“${name}”的域无效`); }
+      catch { throw new Error(t('cookieDomainInvalid', [name])); }
       if (host !== normalizedDomain && !host.endsWith('.' + normalizedDomain)) {
-        throw new Error(`Cookie“${name}”的域必须为 ${host} 或其父域`);
+        throw new Error(t('cookieDomainHost', [name, host]));
       }
       domain = domain.startsWith('.') ? '.' + normalizedDomain : normalizedDomain;
     }
-    if (!path.startsWith('/')) throw new Error(`Cookie“${name}”的路径必须以 / 开头`);
-    if (expirationDate != null && !Number.isFinite(expirationDate)) throw new Error(`Cookie“${name}”的过期时间无效`);
+    if (!path.startsWith('/')) throw new Error(t('cookiePathInvalid', [name]));
+    if (expirationDate != null && !Number.isFinite(expirationDate)) throw new Error(t('cookieExpiryInvalid', [name]));
     const identity = JSON.stringify([name, domain || host, path]);
-    if (identities.has(identity)) throw new Error(`Cookie“${name}”在相同域和路径下重复了`);
+    if (identities.has(identity)) throw new Error(t('cookieDuplicate', [name]));
     identities.add(identity);
     const entry = { name, value, domain, path, httpOnly };
     if (expirationDate != null) entry.expirationDate = expirationDate;

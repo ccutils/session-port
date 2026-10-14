@@ -1,0 +1,315 @@
+{
+  "localeCode": {
+    "message": "en"
+  },
+  "extensionName": {
+    "message": "Session Port — Developer Session Toolkit"
+  },
+  "extensionDescription": {
+    "message": "Configure cookies, localStorage, and sessionStorage for development. Inject session data and open a site in one click."
+  },
+  "brandSubtitle": {
+    "message": "Developer Session Toolkit"
+  },
+  "iconAlt": {
+    "message": "Session Port icon"
+  },
+  "optionsTitle": {
+    "message": "Configure sites · Session Port — Developer Session Toolkit"
+  },
+  "mySites": {
+    "message": "My sites"
+  },
+  "configureSites": {
+    "message": "Configure sites"
+  },
+  "emptyTitle": {
+    "message": "No sites yet"
+  },
+  "emptyHint": {
+    "message": "Add your first site using the button below"
+  },
+  "openingSite": {
+    "message": "Opening $SITE$…",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "deniedWrite": {
+    "message": "Site access was denied. Data could not be written."
+  },
+  "openFailed": {
+    "message": "Failed to open the site"
+  },
+  "siteList": {
+    "message": "Sites"
+  },
+  "siteListAria": {
+    "message": "Configured sites"
+  },
+  "addSite": {
+    "message": "Add site"
+  },
+  "localOnly": {
+    "message": "Settings stay in this browser"
+  },
+  "siteConfiguration": {
+    "message": "Site configuration"
+  },
+  "editSite": {
+    "message": "Edit site"
+  },
+  "newKicker": {
+    "message": "NEW SITE"
+  },
+  "editKicker": {
+    "message": "EDIT SITE"
+  },
+  "introHelp": {
+    "message": "Open a site from the toolbar menu to inject its data."
+  },
+  "basicInfo": {
+    "message": "Basic information"
+  },
+  "basicHelp": {
+    "message": "The name shown in the menu and the URL to open"
+  },
+  "siteName": {
+    "message": "Site name"
+  },
+  "siteNamePlaceholder": {
+    "message": "e.g. Workspace"
+  },
+  "siteUrl": {
+    "message": "Site URL"
+  },
+  "injectionData": {
+    "message": "Injection data"
+  },
+  "injectionHelp": {
+    "message": "Switch data types; configure one entry per row"
+  },
+  "dataTypesAria": {
+    "message": "Injection data types"
+  },
+  "cookieHelp": {
+    "message": "Leave domain blank to use the site host. Path defaults to /. Leave expiration blank for a session cookie."
+  },
+  "actions": {
+    "message": "Actions"
+  },
+  "cookieName": {
+    "message": "Name"
+  },
+  "cookieValue": {
+    "message": "Value"
+  },
+  "cookieDomain": {
+    "message": "Domain"
+  },
+  "cookiePath": {
+    "message": "Path"
+  },
+  "cookieExpiration": {
+    "message": "Expiration"
+  },
+  "httpOnly": {
+    "message": "HttpOnly"
+  },
+  "addCookie": {
+    "message": "Add cookie"
+  },
+  "localHelp": {
+    "message": "Stored in the site’s browser storage. Values may contain equals signs and newlines."
+  },
+  "sessionHelp": {
+    "message": "Applies to the new tab’s session. Values may contain equals signs and newlines."
+  },
+  "keyLabel": {
+    "message": "Key"
+  },
+  "storageValueLabel": {
+    "message": "Value"
+  },
+  "addRow": {
+    "message": "Add row"
+  },
+  "deleteSite": {
+    "message": "Delete site"
+  },
+  "saveSite": {
+    "message": "Save site"
+  },
+  "editorNote": {
+    "message": "Sites may use these values to sign you in. Only add trusted URLs and keep this browser profile secure."
+  },
+  "domainPlaceholder": {
+    "message": "Default: site host"
+  },
+  "deleteRow": {
+    "message": "Delete this row"
+  },
+  "incompleteExpiration": {
+    "message": "Enter a complete cookie expiration date and time"
+  },
+  "siteNameRequired": {
+    "message": "Enter a site name"
+  },
+  "saved": {
+    "message": "Saved. Open the site from the browser toolbar icon."
+  },
+  "deleteConfirm": {
+    "message": "Delete “$SITE$”?",
+    "placeholders": {
+      "site": {
+        "content": "$1"
+      }
+    }
+  },
+  "deleted": {
+    "message": "Site deleted"
+  },
+  "invalidUrl": {
+    "message": "Enter a complete URL, such as https://example.com/dashboard"
+  },
+  "invalidProtocol": {
+    "message": "Site URLs must use HTTP or HTTPS"
+  },
+  "urlCredentials": {
+    "message": "Do not include a username or password in the site URL"
+  },
+  "pairSyntax": {
+    "message": "$LABEL$ row $ROW$ must use name=value",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "row": {
+        "content": "$2"
+      }
+    }
+  },
+  "invalidPairName": {
+    "message": "$LABEL$ row $ROW$ has an invalid name",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "row": {
+        "content": "$2"
+      }
+    }
+  },
+  "duplicateEntry": {
+    "message": "“$NAME$” is duplicated in $LABEL$",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      },
+      "label": {
+        "content": "$2"
+      }
+    }
+  },
+  "storageKeyRequired": {
+    "message": "Enter a Key in $LABEL$ row $ROW$",
+    "placeholders": {
+      "label": {
+        "content": "$1"
+      },
+      "row": {
+        "content": "$2"
+      }
+    }
+  },
+  "cookieNameInvalid": {
+    "message": "Enter a valid name in Cookie row $ROW$",
+    "placeholders": {
+      "row": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieDomainInvalid": {
+    "message": "The domain for cookie “$NAME$” is invalid. Enter a hostname.",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieDomainHost": {
+    "message": "The domain for cookie “$NAME$” must be $HOST$ or a parent domain",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "cookiePathInvalid": {
+    "message": "The path for cookie “$NAME$” must start with /",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieExpiryInvalid": {
+    "message": "The expiration for cookie “$NAME$” is invalid",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "cookieDuplicate": {
+    "message": "Cookie “$NAME$” is duplicated for the same domain and path",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "siteMissing": {
+    "message": "Site not found. Refresh the list and try again."
+  },
+  "permissionMissing": {
+    "message": "Access to this site has not been granted"
+  },
+  "cookieWriteFailed": {
+    "message": "Failed to write cookie “$NAME$”",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "invalidLaunch": {
+    "message": "Invalid launch request"
+  },
+  "expiredLaunch": {
+    "message": "Launch information has expired. Open the site from the extension again."
+  },
+  "launchMismatch": {
+    "message": "The launch page does not match the site configuration"
+  },
+  "launchUnavailable": {
+    "message": "Could not retrieve launch information. Open the site from the extension again."
+  },
+  "storageWriteFailed": {
+    "message": "Failed to write web storage: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "launchFailedHeading": {
+    "message": "Site launch failed"
+  }
+}

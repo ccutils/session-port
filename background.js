@@ -1,4 +1,5 @@
 import { BOOTSTRAP_HASH, cookieDetails, normalizeCookieEntries, normalizeUrl, originPattern, scriptIdForUrl, SITES_KEY } from './common.js';
+import { t } from './i18n.js';
 
 const LAUNCH_KEY = 'launch:';
 
@@ -23,19 +24,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 async function launchSite(siteId) {
   const { [SITES_KEY]: sites = [] } = await chrome.storage.local.get(SITES_KEY);
   const site = sites.find((item) => item.id === siteId);
-  if (!site) throw new Error('站点不存在，请刷新列表后重试');
+  if (!site) throw new Error(t('siteMissing'));
 
   const url = normalizeUrl(site.url);
   const pattern = originPattern(url);
   if (!(await chrome.permissions.contains({ origins: [pattern] }))) {
-    throw new Error('尚未获得此站点的访问权限');
+    throw new Error(t('permissionMissing'));
   }
 
   await ensureBootstrapScript(url, pattern);
 
   for (const cookie of normalizeCookieEntries(site.cookies || [], url)) {
     const result = await chrome.cookies.set(cookieDetails(cookie, url));
-    if (!result) throw new Error(`Cookie“${cookie.name}”写入失败`);
+    if (!result) throw new Error(t('cookieWriteFailed', [cookie.name]));
   }
 
   const token = crypto.randomUUID();
@@ -76,15 +77,15 @@ async function ensureBootstrapScript(url, pattern) {
 
 async function consumeLaunch(token, sender) {
   if (!sender.tab || sender.frameId !== 0 || !/^[a-f0-9-]{36}$/.test(token || '')) {
-    throw new Error('无效的启动请求');
+    throw new Error(t('invalidLaunch'));
   }
   const key = LAUNCH_KEY + token;
   const record = (await chrome.storage.session.get(key))[key];
   if (!record || Date.now() - record.createdAt > 120_000) {
-    throw new Error('启动信息已失效，请重新从扩展打开站点');
+    throw new Error(t('expiredLaunch'));
   }
   if (new URL(sender.url).origin !== record.origin || !sender.url.endsWith(BOOTSTRAP_HASH + token)) {
-    throw new Error('启动页面与站点配置不匹配');
+    throw new Error(t('launchMismatch'));
   }
   await chrome.storage.session.remove(key);
   return record;

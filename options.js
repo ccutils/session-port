@@ -1,5 +1,8 @@
 import { normalizeUrl, originPattern, scriptIdForUrl, SITES_KEY } from './common.js';
 import { createDataEditor } from './data-editor.js';
+import { localizePage, t } from './i18n.js';
+
+localizePage();
 
 const elements = {
   list: document.querySelector('#options-list'),
@@ -32,8 +35,8 @@ function selectSite(id) {
   elements.form.reset();
   elements.status.textContent = '';
   elements.status.classList.remove('success');
-  elements.title.textContent = site ? '编辑站点' : '添加站点';
-  elements.kicker.textContent = site ? 'EDIT SITE' : 'NEW SITE';
+  elements.title.textContent = t(site ? 'editSite' : 'addSite');
+  elements.kicker.textContent = t(site ? 'editKicker' : 'newKicker');
   elements.delete.hidden = !site;
   if (site) {
     elements.name.value = site.name;
@@ -70,7 +73,7 @@ async function saveSite(event) {
   elements.status.classList.remove('success');
   try {
     const name = elements.name.value.trim();
-    if (!name) throw new Error('请填写站点名称');
+    if (!name) throw new Error(t('siteNameRequired'));
     const url = normalizeUrl(elements.url.value);
     const { cookies, localStorage, sessionStorage } = dataEditor.read(url);
 
@@ -87,10 +90,10 @@ async function saveSite(event) {
     }
     selectedId = site.id;
     renderList();
-    elements.title.textContent = '编辑站点';
-    elements.kicker.textContent = 'EDIT SITE';
+    elements.title.textContent = t('editSite');
+    elements.kicker.textContent = t('editKicker');
     elements.delete.hidden = false;
-    elements.status.textContent = '已保存。点击浏览器工具栏图标即可打开。';
+    elements.status.textContent = t('saved');
     elements.status.classList.add('success');
   } catch (error) {
     elements.status.textContent = error.message;
@@ -99,13 +102,13 @@ async function saveSite(event) {
 
 async function deleteSite() {
   const site = sites.find((item) => item.id === selectedId);
-  if (!site || !confirm(`确定删除“${site.name}”吗？`)) return;
+  if (!site || !confirm(t('deleteConfirm', [site.name]))) return;
   try {
     sites = sites.filter((item) => item.id !== selectedId);
     await chrome.storage.local.set({ [SITES_KEY]: sites });
     try { await releaseUnusedOrigin(site.url); } catch (error) { console.warn(error); }
     selectSite(sites[0]?.id || null);
-    elements.status.textContent = '站点已删除';
+    elements.status.textContent = t('deleted');
     elements.status.classList.add('success');
   } catch (error) {
     elements.status.textContent = error.message;

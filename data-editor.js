@@ -1,15 +1,16 @@
 import { normalizeCookieEntries, normalizeStorageEntries } from './common.js';
+import { t } from './i18n.js';
 
 const types = ['cookies', 'localStorage', 'sessionStorage'];
 const cookieFields = [
-  ['name', '名称', 'text', 'session_id'],
-  ['value', '值', 'textarea', 'abc123'],
-  ['domain', '域', 'text', '留空使用站点主机'],
-  ['path', '路径', 'text', '/'],
-  ['expirationDate', '过期时间', 'datetime-local', ''],
-  ['httpOnly', 'HttpOnly', 'checkbox', '']
+  ['name', 'cookieName', 'text', 'session_id'],
+  ['value', 'cookieValue', 'textarea', 'abc123'],
+  ['domain', 'cookieDomain', 'text', ''],
+  ['path', 'cookiePath', 'text', '/'],
+  ['expirationDate', 'cookieExpiration', 'datetime-local', ''],
+  ['httpOnly', 'httpOnly', 'checkbox', '']
 ];
-const storageFields = [['name', 'Key', 'text', 'token'], ['value', 'Value', 'textarea', 'abc123']];
+const storageFields = [['name', 'keyLabel', 'text', 'token'], ['value', 'storageValueLabel', 'textarea', 'abc123']];
 
 export function createDataEditor() {
   const tabs = [...document.querySelectorAll('.data-tab')];
@@ -54,7 +55,7 @@ export function createDataEditor() {
       const cell = document.createElement('td');
       const input = document.createElement(inputType === 'textarea' ? 'textarea' : 'input');
       input.dataset.field = key;
-      input.setAttribute('aria-label', label);
+      input.setAttribute('aria-label', t(label));
       input.autocomplete = 'off';
       if (inputType === 'textarea') {
         input.rows = 1;
@@ -74,6 +75,7 @@ export function createDataEditor() {
         }
       } else input.value = entry[key] ?? (key === 'path' ? '/' : '');
       if (placeholder) input.placeholder = placeholder;
+      if (key === 'domain') input.placeholder = t('domainPlaceholder');
       input.addEventListener('input', () => updateCount(type));
       cell.append(input);
       row.append(cell);
@@ -83,7 +85,7 @@ export function createDataEditor() {
     remove.type = 'button';
     remove.className = 'remove-row';
     remove.textContent = '×';
-    remove.setAttribute('aria-label', '删除此行');
+    remove.setAttribute('aria-label', t('deleteRow'));
     remove.addEventListener('click', () => {
       row.remove();
       const body = document.querySelector(`#${type}-rows`);
@@ -104,7 +106,7 @@ export function createDataEditor() {
         const key = input.dataset.field;
         if (input.type === 'checkbox') entry[key] = input.checked;
         else if (input.type === 'datetime-local') {
-          if (input.validity.badInput) throw new Error('请填写完整的 Cookie 过期时间');
+          if (input.validity.badInput) throw new Error(t('incompleteExpiration'));
           if (input.value) entry[key] = new Date(input.value).getTime() / 1000;
         } else entry[key] = input.value;
       }
